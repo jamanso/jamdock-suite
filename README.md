@@ -75,3 +75,5 @@ chmod +x jamlib jamreceptor jamqvina jamresume jamrank
 echo 'export PATH="$HOME/Programs/jamdock-suite:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
+# Getting started
+To begin using the jamdock-suite, follow the steps below to set up and run a full virtual screening workflow. These steps assume you have installed all required dependencies and added the suite to your system PATH.
