@@ -1,0 +1,291 @@
+#!/bin/bash
+# Author: José Antonio Manso García
+# License: CC BY-NC 4.0
+# This script is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
+# It may not be used for commercial purposes without explicit permission from the author.
+# More info: https://creativecommons.org/licenses/by-nc/4.0/
+
+read -p "Enter the number of top compounds to display: " top_n
+
+# Get the current timestamp
+timestamp=$(date +"%Y_%m_%d_%H%M")
+
+# Automatically detect the SDF folder
+WORKDIR="$(pwd)"
+sdf_dir=""
+
+if [[ -d "$WORKDIR/fda_sdf_compounds" ]]; then
+    sdf_dir="$WORKDIR/fda_sdf_compounds"
+elif [[ $(find "$WORKDIR" -maxdepth 1 -type d -name "library_sdf_*") ]]; then
+    sdf_dir=$(find "$WORKDIR" -maxdepth 1 -type d -name "library_sdf_*" | head -n 1)
+else
+    echo "Error: No valid SDF folder found."
+    exit 1
+fi
+
+# Function to extract ZINC ID from SDF
+get_zinc_id_from_sdf() {
+    local sdf_file="$1"
+    if [[ -f "$sdf_file" ]]; then
+        zinc_id=$(grep -oP "^ZINC[0-9]+" "$sdf_file")
+        echo "$zinc_id"
+    else
+        echo "ZINC ID not found"
+    fi
+}
+
+while true; do
+    echo "Select an option:"
+    echo "1) Top compounds based on affinity of first mode"
+    echo "2) Top compounds based on affinity of first mode + SimScore + TotalModes + MW (This might take a few minutes)"
+    echo "3) Exit"
+    read -p "Enter your choice: " choice
+
+    log_dir="$WORKDIR/docking_results"
+
+    case $choice in
+        1)
+           echo "Executing: Top compounds based on affinity of first mode"
+method_results_file="$WORKDIR/results_affinity_$timestamp.txt"
+result_file="$WORKDIR/top_${top_n}_hits_affinity_$timestamp.txt"
+
+# Column widths
+width_affinity=10
+width_link=65
+width_filename=30
+
+# Write header
+printf "%-*s%-*s%-*s\n" \
+  $width_affinity "Affinity" \
+  $width_link "ZINC_Link" \
+  $width_filename "Filename" > "$method_results_file"
+
+for log_file in "$log_dir"/*.log; do
+    affinity=$(grep -oP '^\s*1\s+\K[-0-9.]+' "$log_file")
+    filename=$(basename "$log_file" .log)
+    base_name=$(echo "$filename" | sed 's/_docking.pdbqt//')
+    sdf_file="$sdf_dir/${base_name}.sdf"
+
+    if [[ ! -z "$affinity" ]]; then
+        zinc_id=$(get_zinc_id_from_sdf "$sdf_file")
+        zinc_link="https://zinc.docking.org/substances/$zinc_id/"
+
+        printf "%-*s%-*s%-*s\n" \
+          $width_affinity "$affinity" \
+          $width_link "$zinc_link" \
+          $width_filename "$filename" >> "$method_results_file"
+    fi
+done
+
+(head -n 1 "$method_results_file" && tail -n +2 "$method_results_file" | LC_ALL=C sort -g | head -n "$top_n") > "$result_file"
+echo "Results saved to $result_file"
+cat "$result_file"
+exit 0
+;;
+
+        2)
+          echo "Executing option 2: please wait, this might take a few minutes or even hours"
+
+method_results_file="$WORKDIR/results_affinity_and_simscore_$timestamp.txt"
+result_file="$WORKDIR/top_${top_n}_hits_affinity_and_simscore_$timestamp.txt"
+
+# Write header
+printf "%-10s %-8s %-10s %-5s %-50s %-30s\n" "Affinity" "SimScore" "TotalModes" "MW" "ZINC_Link" "Filename" > "$method_results_file"
+
+# Function to extract molecular weight using Open Babel
+get_mw_from_sdf() {
+    local sdf_file="$1"
+    obabel "$sdf_file" -osmi --append MW 2>/dev/null | awk '{print int($2)}'
+}
+
+# Function to extract ZINC ID from .sdf file
+get_zinc_id_from_sdf() {
+    local sdf_file="$1"
+
+    # Try <ZINC_ID> field first
+    zinc_id=$(grep -A1 -i "<ZINC_ID>" "$sdf_file" | tail -n1 | tr -d '\r' | tr -d '[:space:]')
+
+    # If not found, fall back to first line (e.g., for library_sdf_* files)
+    if [[ -z "$zinc_id" ]]; then
+        first_line=$(head -n 1 "$sdf_file" | tr -d '\r' | tr -d '[:space:]')
+        if [[ "$first_line" =~ ^ZINC[0-9]+$ ]]; then
+            zinc_id="$first_line"
+        fi
+    fi
+
+    echo "$zinc_id"
+}
+
+# Loop through all .log files in docking_results directory
+for log_file in "$log_dir"/*.log; do
+    if [ -f "$log_file" ]; then
+        affinity=$(grep -oP '^\s*1\s+\K[-0-9.]+' "$log_file")
+        filename=$(basename "$log_file" .log)
+        base_name=$(echo "$filename" | sed 's/_docking.pdbqt//')
+
+        # Locate the matching .sdf file
+        sdf_file=""
+        found_sdf=false
+        for candidate_dir in "$WORKDIR/fda_sdf_compounds" "$WORKDIR"/library_sdf_*; do
+            test_file="$candidate_dir/${base_name}.sdf"
+            if [ -f "$test_file" ]; then
+                sdf_file="$test_file"
+                found_sdf=true
+                break
+            fi
+        done
+
+        if ! $found_sdf; then
+            echo "Warning: SDF file not found for $base_name"
+        fi
+
+        count_l_b=0
+        count_u_b=0
+        total_modes=0
+
+        while read -r line; do
+            if [[ "$line" =~ ^[[:space:]]*[0-9]+[[:space:]]+[-0-9.]+[[:space:]]+[-0-9.]+[[:space:]]+[-0-9.]+$ ]]; then
+                ((total_modes++))
+                l_b_rmsd=$(echo "$line" | awk '{print $3}')
+                u_b_rmsd=$(echo "$line" | awk '{print $4}')
+
+                if (( $(echo "$l_b_rmsd >= 0 && $l_b_rmsd < 1.6" | bc -l) )); then
+                    ((count_l_b++))
+                fi
+                if (( $(echo "$u_b_rmsd >= 0 && $u_b_rmsd < 3.2" | bc -l) )); then
+                    ((count_u_b++))
+                fi
+            fi
+        done < "$log_file"
+
+        if [[ -n "$affinity" && $total_modes -gt 0 && -f "$sdf_file" ]]; then
+            pct_l_b=$(echo "scale=2; 100 * ($count_l_b - 1) / $total_modes" | bc -l)
+            pct_u_b=$(echo "scale=2; 100 * ($count_u_b - 1) / $total_modes" | bc -l)
+            pct_sum=$(printf "%.0f" $(echo "($pct_l_b + $pct_u_b) / 2" | bc -l))
+
+            mw=$(get_mw_from_sdf "$sdf_file")
+            zinc_id=$(get_zinc_id_from_sdf "$sdf_file")
+
+            if [[ -z "$zinc_id" ]]; then
+                zinc_link="N/A"
+            else
+                zinc_link="https://zinc.docking.org/substances/$zinc_id/"
+            fi
+
+            # Write formatted line to output
+            printf "%-10s %-8s %-10s %-5s %-50s %-30s\n" "$affinity" "$pct_sum" "$total_modes" "$mw" "$zinc_link" "$filename" >> "$method_results_file"
+        fi
+    fi
+done
+
+# Sort and select top results, including the header
+(head -n 1 "$method_results_file" && tail -n +2 "$method_results_file" | LC_ALL=C sort -g | head -n "$top_n") > "$result_file"
+
+# Function to calculate MW from SMILES
+get_mw_from_smiles() {
+    local smiles="$1"
+    # We get the MW using obabel
+    echo "$smiles" | obabel -ismi -osmi --append MW 2>/dev/null | awk '{print int($2)}'
+}
+
+# Temporary file to update the result with MW from SMILES
+updated_result_file=$(mktemp)
+
+# Copy the header intact
+head -n 1 "$result_file" > "$updated_result_file"
+
+# Process each line to update MW
+tail -n +2 "$result_file" | while read -r line; do
+    affinity=$(echo "$line" | awk '{print $1}')
+    simscore=$(echo "$line" | awk '{print $2}')
+    total_modes=$(echo "$line" | awk '{print $3}')
+    old_mw=$(echo "$line" | awk '{print $4}')
+    zinc_link=$(echo "$line" | awk '{print $5}')
+    filename=$(echo "$line" | awk '{for(i=6;i<=NF;++i) printf $i " "; print ""}' | sed 's/ *$//')
+
+    # Extract ZINC_ID from the link
+    zinc_id=$(echo "$zinc_link" | sed -E 's|https?://[^/]+/substances/([^/]+)/|\1|')
+
+    if [[ -n "$zinc_id" && "$zinc_id" != "N/A" ]]; then
+        # Get SMILES via curl
+        smiles=$(curl -s "https://zinc15.docking.org/substances/${zinc_id}.smi" | head -n1 | awk '{print $1}')
+
+        if [[ -n "$smiles" ]]; then
+            # Calculate MW from SMILES
+            mw=$(get_mw_from_smiles "$smiles")
+        else
+            mw="$old_mw"
+        fi
+    else
+        mw="$old_mw"
+    fi
+
+    # Print line with the updated MW
+    printf "%-10s %-8s %-10s %-5s %-50s %-30s\n" "$affinity" "$simscore" "$total_modes" "$mw" "$zinc_link" "$filename"
+done >> "$updated_result_file"
+
+# Replace the original file
+mv "$updated_result_file" "$result_file"
+
+# Extract top SimScore values
+top_scores=$(tail -n +2 "$result_file" | awk '{print $2}' | sort -nr | uniq | head -n 1)
+
+# Column widths
+width_affinity=10
+width_simscore=12
+width_modes=12
+width_mw=6
+width_link=65
+width_filename=30
+
+# Temporary file for final aligned output
+tmp_file=$(mktemp)
+
+# Header
+printf "%-*s%-*s%-*s%-*s%-*s%-*s\n" \
+  $width_affinity "Affinity" \
+  $width_simscore "SimScore" \
+  $width_modes "TotalModes" \
+  $width_mw "MW" \
+  $width_link "ZINC_Link" \
+  $width_filename "Filename" > "$tmp_file"
+
+# Format each line
+tail -n +2 "$result_file" | while read -r line; do
+    affinity=$(echo "$line" | awk '{print $1}')
+    simscore_raw=$(echo "$line" | awk '{print $2}')
+    total_modes=$(echo "$line" | awk '{print $3}')
+    mw=$(echo "$line" | awk '{print $4}')
+    zinc_link=$(echo "$line" | awk '{print $5}')
+    filename=$(echo "$line" | awk '{for(i=6;i<=NF;++i) printf $i " "; print ""}' | sed 's/ *$//')
+
+    # Format SimScore
+    simscore_str=$(printf "%-*s" "$width_simscore" "$simscore_raw")
+
+    # Print line
+    printf "%-*s%-*s%-*s%-*s%-*s%-*s\n" \
+      $width_affinity "$affinity" \
+      $width_simscore "$simscore_str" \
+      $width_modes "$total_modes" \
+      $width_mw "$mw" \
+      $width_link "$zinc_link" \
+      $width_filename "$filename"
+done >> "$tmp_file"
+
+# Replace the original file
+mv "$tmp_file" "$result_file"
+
+echo "Results saved to:"
+echo "$result_file"
+cat "$result_file"
+exit 0
+;;
+        3)
+            echo "Exiting..."
+            exit 0
+            ;;
+        *)
+            echo "Invalid choice. Please select a valid option."
+            ;;
+    esac
+done
