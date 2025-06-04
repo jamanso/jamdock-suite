@@ -13,3 +13,5 @@ The scripts included are:
         
 This suite is designed to support researchers in the early stages of drug discovery and drug repurposing projects, helping to streamline large-scale virtual screening workflows and lower the barriers to performing molecular docking experiments.
 # System setup
+This protocol is designed for Linux- or Unix-based operating systems. It can also run on Windows 11 using the Windows Subsystem for Linux (WSL).
+
