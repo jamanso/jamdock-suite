@@ -33,20 +33,7 @@ wget https://ccsb.scripps.edu/mgltools/download/491/mgltools_Linux-x86_64_1.5.7.
 tar -zxf mgltools_Linux-x86_64_1.5.7.tar.gz
 cd mgltools_x86_64Linux2_1.5.7/
 ./install.sh
-```
-Add alias to your .bashrc:
-
-```bash
-gedit ~/.bashrc 
-```
-Add the following line to the end of the file:
-
-```bash
-alias adt='$HOME/Programs/mgltools_x86_64Linux2_1.5.7/bin/adt'
-```
-Activate the changes:
-
-```bash
+echo 'alias adt='$HOME/Programs/mgltools_x86_64Linux2_1.5.7/bin/adt'' >> ~/.bashrc
 source ~/.bashrc
 ```
 **3. Install fpocket**
@@ -73,13 +60,10 @@ Build the program:
 ```bash
 make
 ```
-Configure environment variables for QuickVina 2. Edit the .bashrc file and append the following lines:
+Configure environment variables for QuickVina 2.
 ```bash
-alias qvina02='$HOME/Programs/qvina/qvina02'
-export PATH=$HOME/Programs/qvina:$PATH
-```
-Activate the changes:
-```bash
+echo 'alias qvina02='$HOME/Programs/qvina/qvina02'' >> ~/.bashrc
+echo 'export PATH=$HOME/Programs/qvina:$PATH' >> ~/.bashrc
 source ~/.bashrc
 ```
 **5. Installing jamdock-suite**
