@@ -85,17 +85,17 @@ mkdir ~/<your_project_name>
 cd ~/<your_project_name>
 ```
 
-**2. Generate a Compound Library (`jamlib`)**\
+**2. Generate a compound library (`jamlib`)**\
 Execute `jamlib`and choose one of the two modes:
 - FDA-approved compounds
 - Custom compound library. You will be prompted to enter:\
-            - Number of compounds\
             - Molecular weight (MW) range\
-            - LogP range
+            - LogP range\
+            - Number of compounds
  
 After running this program, a library of 3D PDBQT compounds will be ready for docking.
 
-**3. Prepare the Receptor (`jamreceptor`)**\
+**3. Prepare the receptor (`jamreceptor`)**\
 This step sets up the receptor and docking grid.
 
 After executing `jamreceptor`you will be prompted to enter:\
@@ -112,5 +112,22 @@ grid.conf
 grid_box.py
 ```
 
-**4. Prepare the Receptor (`jamreceptor`)**\
+**4. Run the docking (`jamqvina`)**\
+Dock the generated compounds libraries against the prepared receptor executing `jamqvina`. You will be prompted to provide:
+- Receptor file name (e.g. receptor_for_docking.pdbqt)
+- Exhaustiveness value
+- Maximum number of modes
+- Energy range
+- Number of CPUs to use
+- Whether the compound library is FDA-based (yes/no)
 
+This script will execute docking jobs using QuickVina 2.
+
+**Note:** If the docking job is interrupted (planned or unexpected), use the program `jamresume`to resume.
+
+**5. Analyze Results (`jamrank`)**
+Once docking is complete, analyze and rank the results executing `jamrank`. You will be asked to:
+- Enter the number of top compounds to display
+- Select a sorting method (fast or detailed)
+
+Output includes ranked compounds by affinities of first mode, ZINC link and file name (option 1), and optionally with a similarity among the modes score, MW, number of modes (option 2).
