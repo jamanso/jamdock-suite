@@ -91,6 +91,26 @@ Execute `jamlib`and choose one of the two modes:
 - Custom compound library. You will be prompted to enter:\
             - Number of compounds\
             - Molecular weight (MW) range\
-            -  LogP range
+            - LogP range
  
 After running this program, a library of 3D PDBQT compounds will be ready for docking.
+
+**3. Prepare the Receptor (`jamreceptor`)**\
+This step sets up the receptor and docking grid.
+
+After executing `jamreceptor`you will be prompted to enter:\
+- Name of the PDB file
+- Chain ID(s) to analyze
+- Binding pocket(s) to use (detected using fpocket)
+- Padding size (in Ångströms)
+
+Output files:
+
+```bash
+receptor_for_docking.pdbqt
+grid.conf
+grid_box.py
+```
+
+**4. Prepare the Receptor (`jamreceptor`)**\
+
