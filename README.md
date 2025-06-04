@@ -3,11 +3,11 @@ This suite is designed to support researchers in the early stages of drug discov
 
 ## Content
 
-- **jamlib** – Automatically generates compound libraries in PDBQT format, including FDA-approved drugs and custom libraries of purchasable compounds, ready for use with QuickVina 2.
-- **jamreceptor** – Prepares receptor structures (in PDB format) by converting them to PDBQT, identifying binding pockets using fpocket, and generating grid box configuration files.
-- **jamqvina** – Automates the setup and execution of docking jobs with QuickVina 2, including parameter configuration and time estimation.
-- **jamresume** – Enables the resumption of interrupted docking jobs, whether due to planned pauses or unexpected failures.
-- **jamrank** – Provides two modes for analyzing docking results:
+- `jamlib` – Automatically generates compound libraries in PDBQT format, including FDA-approved drugs and custom libraries of purchasable compounds, ready for use with QuickVina 2.
+- `jamreceptor` – Prepares receptor structures (in PDB format) by converting them to PDBQT, identifying binding pockets using fpocket, and generating grid box configuration files.
+- `jamqvina` – Automates the setup and execution of docking jobs with QuickVina 2, including parameter configuration and time estimation.
+- `jamresume` – Enables the resumption of interrupted docking jobs, whether due to planned pauses or unexpected failures.
+- `jamrank` – Provides two modes for analyzing docking results:
       - A fast mode that outputs affinities, ZINC links, and compound IDs.
       - A detailed mode that additionally computes a similarity score among poses, molecular weight, number of modes, and generates a comprehensive summary.
 
@@ -77,3 +77,20 @@ source ~/.bashrc
 ```
 # Getting started
 To begin using the jamdock-suite, follow the steps below to set up and run a full virtual screening workflow. These steps assume you have installed all required dependencies and added the suite to your system PATH.
+
+**1. Create a working directory**\
+Start by creating a clean directory where user will locate their receptor of interest, **receptor.pdb**,  and where all input and output files will be stored:
+```bash
+mkdir ~/<your_project_name>
+cd ~/<your_project_name>
+```
+
+**2. Generate a Compound Library (`jamlib`)**\
+Execute `jamlib`and choose one of the two modes:
+- FDA-approved compounds
+- Custom compound library. You will be prompted to enter:\
+            - Number of compounds\
+            - Molecular weight (MW) range\
+            -  LogP range\
+ 
+After running this program, a library of 3D PDBQT compounds will be ready for docking.
