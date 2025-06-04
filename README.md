@@ -91,6 +91,6 @@ Execute `jamlib`and choose one of the two modes:
 - Custom compound library. You will be prompted to enter:\
             - Number of compounds\
             - Molecular weight (MW) range\
-            -  LogP range\
+            -  LogP range
  
 After running this program, a library of 3D PDBQT compounds will be ready for docking.
