@@ -44,7 +44,7 @@ cd fpocket
 make
 sudo make install
 ```
-**4. Installing QuickVina 2**
+**4. Install QuickVina 2**
 ```bash
 cd ~/Programs
 git clone https://github.com/QVina/qvina.git
@@ -66,7 +66,7 @@ echo 'alias qvina02='$HOME/Programs/qvina/qvina02'' >> ~/.bashrc
 echo 'export PATH=$HOME/Programs/qvina:$PATH' >> ~/.bashrc
 source ~/.bashrc
 ```
-**5. Installing jamdock-suite**
+**5. Install jamdock-suite**
 ```bash
 cd ~/Programs
 git clone https://github.com/jamanso/jamdock-suite.git
@@ -131,3 +131,6 @@ Once docking is complete, analyze and rank the results executing `jamrank`. You 
 - Select a sorting method (fast or detailed)
 
 Output includes ranked compounds by affinities of first mode, ZINC link and file name (option 1), and optionally with a similarity among the modes score, MW, number of modes (option 2).
+
+# License
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. See the LICENSE file for details.
