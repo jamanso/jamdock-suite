@@ -98,7 +98,7 @@ After running this program, a library of 3D PDBQT compounds will be ready for do
 **3. Prepare the receptor (`jamreceptor`)**\
 This step sets up the receptor and docking grid.
 
-After executing `jamreceptor`you will be prompted to enter:\
+After executing `jamreceptor`you will be prompted to enter:
 - Name of the PDB file
 - Chain ID(s) to analyze
 - Binding pocket(s) to use (detected using fpocket)
