@@ -133,4 +133,4 @@ Once docking is complete, analyze and rank the results executing `jamrank`. You 
 Output includes ranked compounds by affinities of first mode, ZINC link and file name (option 1), and optionally with a similarity among the modes score, MW, number of modes (option 2).
 
 # License
-This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. See the [LICENSE](https://github.com/jamanso/jamdock-suite/edit/main/your-repo-name/LICENSE.txt) file for details.
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. See the [LICENSE](https://github.com/jamanso/jamdock-suite/blob/main/LICENSE.txt) file for details.
