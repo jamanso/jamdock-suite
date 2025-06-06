@@ -145,3 +145,8 @@ If you use this suite in your research, please cite the related Zenodo entry and
 
 # License
 This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. See the [LICENSE](https://github.com/jamanso/jamdock-suite/blob/main/LICENSE.txt) file for details.
+
+# Contact
+For questions or suggestions, please contact:
+
+José Antonio Manso - joseantonio.manso@unican.es
