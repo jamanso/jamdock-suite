@@ -1,3 +1,5 @@
+Before running the scripts, make sure to install and set up your equipment by following the steps below. These instructions (tested on macOS Sonoma 14.6.7) assume a clean system. If you already have some of the required software installed, you may skip the corresponding steps.
+
 **1. Update and install essential packages:**
 
 Open a terminal (Bash Shell) and execute
