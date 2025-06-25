@@ -12,7 +12,7 @@ This suite is designed to support researchers in the early stages of drug discov
       - A detailed mode that additionally computes a similarity score among poses, molecular weight, number of modes, and generates a comprehensive summary.
 
 # System setup
-Current version of jamdock-suite is designed to run into a Linux machine. Windows 11 users can install a desired Linux distribution under WSL (https://learn.microsoft.com/en-us/windows/wsl/install).
+jamdock-suite is designed to run into Linux- or Unix-based operating systems. Windows 11 users can install a desired Linux distribution under WSL (https://learn.microsoft.com/en-us/windows/wsl/install).
 For macOS users, see [macOS Setup Instructions](./macos-setup.md).
 
 Before executing the scripts install and setup your equipment following the next steps:
