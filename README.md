@@ -13,6 +13,7 @@ This suite is designed to support researchers in the early stages of drug discov
 
 # System setup
 Current version of jamdock-suite is designed to run into a Linux machine. Windows 11 users can install a desired Linux distribution under WSL (https://learn.microsoft.com/en-us/windows/wsl/install).
+For macOS users, see [macOS Setup Instructions](./macos-setup.md).
 
 Before executing the scripts install and setup your equipment following the next steps:
 
