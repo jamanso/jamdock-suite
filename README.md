@@ -72,7 +72,7 @@ source ~/.bashrc
 cd ~/Programs
 git clone https://github.com/jamanso/jamdock-suite.git
 cd jamdock-suite
-chmod +x jamlib jamreceptor jamqvina jamresume jamrank
+chmod +x jam*
 echo 'export PATH="$HOME/Programs/jamdock-suite:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
