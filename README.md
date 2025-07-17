@@ -54,8 +54,8 @@ git checkout qvina2
 ```
 Edit the top of the Makefile to match your Boost installation:
 ```bash
-BASE = /usr/include/boost
-BOOST_VERSION=1_74 #or your installed version
+BOOST_VERSION=1_74
+BOOST_INCLUDE = /usr/include
 ```
 Build the program:
 ```bash
