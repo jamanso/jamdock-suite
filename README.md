@@ -137,12 +137,14 @@ Output includes ranked compounds by affinities of first mode, ZINC link and file
 
 If you use this suite in your research, please cite the related Zenodo entry and other software publications:
 - Manso, J.A. (2025). A collection of bash scripts for a virtual screening pipeline: from compound library generation to docking score evaluation. Zenodo, https://doi.org/10.5281/zenodo.15577778.
-- Irwin et al. (2020). ZINC20—A Free Ultralarge-Scale Chemical Database for Ligand Discovery. J. Chem. Inf. Model. 60, 6065–6073. https://doi.org/10.1021/acs.jcim.0c00675.
 - O’Boyle, N.M., Banck, M., James, C.A., Morley, C., Vandermeersch, T., and Hutchison, G.R. (2011). Open Babel: An open chemical toolbox. Journal of Cheminformatics 3, 33. https://doi.org/10.1186/1758-2946-3-33.
 - Morris, G.M., Huey, R., Lindstrom, W., Sanner, M.F., Belew, R.K., Goodsell, D.S., and Olson, A.J. (2009). AutoDock4 and AutoDockTools4: Automated Docking with Selective Receptor Flexibility. J Comput Chem 30, 2785–2791. https://doi.org/10.1002/jcc.21256.
 - Le Guilloux, V., Schmidtke, P., and Tuffery, P. (2009). Fpocket: An open source platform for ligand pocket detection. BMC Bioinformatics 10, 168. https://doi.org/10.1186/1471-2105-10-168.
 - Trott, O., and Olson, A.J. (2010). AutoDock Vina: Improving the speed and accuracy of docking with a new scoring function, efficient optimization, and multithreading. Journal of Computational Chemistry 31, 455–461. https://doi.org/10.1002/jcc.21334.
 - Alhossary, A., Handoko, S.D., Mu, Y., and Kwoh, C.-K. (2015). Fast, accurate, and reliable molecular docking with QuickVina 2. Bioinformatics 31, 2214–2216. https://doi.org/10.1093/bioinformatics/btv082.
+- Irwin, J.J., and Shoichet, B.K. (2005). ZINC − A Free Database of Commercially Available Compounds for Virtual Screening. J. Chem. Inf. Model. 45, 177–182. https://doi.org/10.1021/ci049714+.
+- Sterling, T., and Irwin, J.J. (2015). ZINC 15 – Ligand Discovery for Everyone. J. Chem. Inf. Model. 55, 2324-2337. https://doi.org/10.1021/acs.jcim.5b00559.
+- Irwin et al. (2020). ZINC20—A Free Ultralarge-Scale Chemical Database for Ligand Discovery. J. Chem. Inf. Model. 60, 6065–6073. https://doi.org/10.1021/acs.jcim.0c00675.
 
 # License
 This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. See the [LICENSE](https://github.com/jamanso/jamdock-suite/blob/main/LICENSE.txt) file for details.
