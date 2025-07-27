@@ -14,7 +14,7 @@ Install Homebrew (a package manager for macOS):
 Then install required packages and configure the environment:
 ```bash
 brew update
-brew install makedepend xquartz open-babel pymol git wget nedit bash coreutils
+brew install makedepend xquartz open-babel pymol git wget curl nedit bash coreutils
 echo 'alias shuf="gshuf"' >> ~/.zprofile
 ```
 Restart your computer to complete the setup.
