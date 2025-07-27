@@ -24,7 +24,7 @@ Open a terminal (Bash Shell) and execute
  sudo apt update && sudo apt upgrade -y
 ```
 ```bash
- sudo apt install -y build-essential gedit cmake openbabel pymol libxmu6 wget bc git libboost1.74-all-dev xutils-dev
+ sudo apt install -y build-essential gedit cmake openbabel pymol libxmu6 wget curl bc git libboost1.74-all-dev xutils-dev
 ```
 **2. Install AutoDockTools (MGLTools)**
 ```bash
