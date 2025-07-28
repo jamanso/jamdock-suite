@@ -52,7 +52,7 @@ git clone https://github.com/QVina/qvina.git
 cd qvina
 git checkout qvina2
 ```
-Edit the top of the Makefile to match your Boost C++ library configuration:
+Edit the top of the Makefile to match your Boost installation:
 ```bash
 BOOST_VERSION=1_74
 BOOST_INCLUDE = /usr/include
