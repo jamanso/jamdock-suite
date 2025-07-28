@@ -88,11 +88,11 @@ cd ~/<your_project_name>
 
 **2. Generate a compound library (`jamlib`)**\
 Execute `jamlib`and choose one of the two modes:
-- FDA-approved compounds
 - Custom compound library. You will be prompted to enter:\
             - Molecular weight (MW) range\
             - LogP range\
             - Number of compounds
+- FDA-approved compounds
  
 After running this program, a library of 3D PDBQT compounds will be ready for docking.
 
