@@ -84,7 +84,7 @@ make
 ```
 Configure your environment:
 ```bash
-echo 'export DYLD_LIBRARY_PATH=”/usr/local/lib/:$DYLD_LIBRARY_PATH”' >> ~/.zprofile
+echo 'export DYLD_LIBRARY_PATH="/usr/local/lib/:$DYLD_LIBRARY_PATH"' >> ~/.zprofile
 echo 'alias qvina02="$HOME/Programs/qvina/qvina02"' >> ~/.zprofile
 echo 'export PATH="$HOME/Programs/qvina:$PATH"' >> ~/.zprofile
 source ~/.zprofile
