@@ -6,8 +6,8 @@ Begin by ensuring Xcode Command Line Tools are installed. Open a Terminal (zsh) 
 ```
 This will prompt a pop-up window. Click Install to proceed.
 
-**1.	Install Homebrew and essential packages**
-Install Homebrew (a package manager for macOS):
+**1.	Install Homebrew (a package manager for macOS) and essential packages**
+
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
@@ -18,7 +18,9 @@ brew install makedepend xquartz open-babel pymol git wget curl nedit bash coreut
 echo 'alias shuf="gshuf"' >> ~/.zprofile
 ```
 Restart your computer to complete the setup.
+
 **2. Install AutoDockTools (MGLTools)**
+
 Download, extract, and install AutoDockTools:
 ```bash
 mkdir ~/Programs
@@ -43,9 +45,8 @@ echo 'alias adt="$HOME/Programs/mgltools_1.5.7_MacOS-X/bin/adt"' >> ~/.zprofile
 source ~/.zprofile
 ```
 
-
-
 **3. Install fpocket**
+
 The jamreceptor script also utilizes fpocket, an open-source tool for identifying and characterizing ligand-binding pockets. To install:
 ```bash
 cd ~/Programs
@@ -57,6 +58,7 @@ sudo make install
 Restart the terminal before using fpocket.
 
 **4. Install QuickVina 2**
+
 This guide uses QuickVina 2, a fast and accurate fork of AutoDock Vina used in the jamqvina script. To install:
 ```bash
 cd ~/Programs
@@ -88,6 +90,7 @@ echo 'export PATH="$HOME/Programs/qvina:$PATH"' >> ~/.zprofile
 source ~/.zprofile
 ```
 **5. Install jamdock-suite**
+
 ```bash
 cd ~/Programs
 git clone https://github.com/jamanso/jamdock-suite.git
