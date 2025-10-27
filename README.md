@@ -1,6 +1,11 @@
 <p align="center">
-  <img src="https://github.com/jamanso/jamdock-suite/blob/main/assets/banner_github_v03.png?raw=true" alt="jamdock-suite banner" width="800">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/jamanso/jamdock-suite/blob/main/assets/banner_github_v04_dark.png?raw=true">
+    <source media="(prefers-color-scheme: light)" srcset="https://github.com/jamanso/jamdock-suite/blob/main/assets/banner_github_v03.png?raw=true">
+    <img src="https://github.com/jamanso/jamdock-suite/blob/main/assets/banner_github.png?raw=true" alt="jamdock-suite banner" width="850">
+  </picture>
 </p>
+
 
 
 # jamdock-suite
