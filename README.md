@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="https://github.com/jamanso/jamdock-suite/tree/main/assets/banner_github_v02.png?raw=true" alt="jamdock-suite banner" width="800">
+</p>
+
+
 # jamdock-suite
 This suite is designed to support researchers in the early stages of drug discovery and drug repurposing projects, helping to streamline large-scale virtual screening workflows and lower the barriers to performing molecular docking experiments. The suite includes five Bash scripts to simplify and automate key steps in a virtual screening pipeline such as compound library preparation, receptor setup, automated docking, job resumption, and docking result analysis, using tools such as QuickVina 2, Open Babel, AutoDockTools and fpocket.
 
