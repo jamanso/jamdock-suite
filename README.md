@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/<your-username>/<your-repo>/blob/main/assets/banner_light.png?raw=true" alt="jamdock-suite banner" width="850">
+  <img src="https://github.com/jamanso/jamdock-suite/blob/main/assets/banner_light.png?raw=true" alt="jamdock-suite banner" width="850">
 </p>
 
 
