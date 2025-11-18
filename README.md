@@ -1,8 +1,9 @@
 <p align="center">
+  <img src="https://raw.githubusercontent.com/jamanso/jamdock-suite/main/assets/banner_dark.png" alt="jamdock-suite banner" width="850">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github.com/jamanso/jamdock-suite/blob/main/assets/banner_dark.png?raw=true">
-    <source media="(prefers-color-scheme: light)" srcset="https://github.com/jamanso/jamdock-suite/blob/main/assets/banner_light.png?raw=true">
-    <img src="https://github.com/jamanso/jamdock-suite/blob/main/assets/banner_light.png?raw=true" alt="jamdock-suite banner" width="850">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/jamanso/jamdock-suite/main/assets/banner_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/jamanso/jamdock-suite/main/assets/banner_light.png">
+    <img src="https://raw.githubusercontent.com/jamanso/jamdock-suite/main/assets/banner_light.png" alt="jamdock-suite banner" width="850">
   </picture>
 </p>
 
