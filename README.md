@@ -1,5 +1,4 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/jamanso/jamdock-suite/main/assets/banner_dark.png" alt="jamdock-suite banner" width="850">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/jamanso/jamdock-suite/main/assets/banner_dark.png">
     <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/jamanso/jamdock-suite/main/assets/banner_light.png">
