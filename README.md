@@ -21,6 +21,8 @@ This suite is designed to support researchers in the early stages of drug discov
       - A fast mode that outputs affinities, ZINC links, and compound IDs.
       - A detailed mode that additionally computes a similarity score among poses, molecular weight, number of modes, and generates a comprehensive summary.
 
+> 💡 **Prefer a point-and-click interface?** The same pipeline is also distributed as a desktop GUI: [**jamdock-gui**](https://github.com/jamanso/jamdock-gui) ([![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20268820.svg)](https://doi.org/10.5281/zenodo.20268820)). Built on PySide6 + RDKit, it adds structural-water handling, pH-dependent protonation of titratable residues, an integrated PyMOL viewer, parallel docking with crash recovery, and live Rule-of-Five colouring of results.
+
 # System setup
 jamdock-suite is designed to run into Linux- or Unix-based operating systems. Windows 11 users can install a desired Linux distribution under WSL (https://learn.microsoft.com/en-us/windows/wsl/install).
 For macOS users, see [macOS Setup Instructions](./macos-setup.md).
